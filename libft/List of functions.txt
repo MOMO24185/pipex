@@ -1,0 +1,47 @@
+MANDATORY:
+• ft_isalpha - DONE
+• ft_isdigit - DONE
+• ft_isalnum - DONE
+• ft_isascii - DONE
+• ft_isprint - DONE
+• ft_strlen - DONE
+• ft_memset - DONE
+• ft_bzero - DONE
+• ft_memcpy - DONE
+• ft_memmove - DONE
+• ft_strlcpy - DONE
+• ft_strlcat - DONE
+• ft_toupper - DONE
+• ft_tolower - DONE
+• ft_strchr - DONE
+• ft_strrchr - DONE
+• ft_strncmp - DONE
+• ft_memchr - DONE
+• ft_memcmp - DONE
+• ft_strnstr - DONE
+• ft_atoi - DONE
+• ft_calloc - DONE
+• ft_strdup - DONE
+ADDITIONAL:
+• ft_substr - DONE
+• ft_strjoin - DONE
+• ft_strtrim - DONE
+• ft_split - DONE
+• ft_itoa - DONE
+• ft_strmapi - DONE
+• ft_striteri - DONE
+• ft_putchar_fd - DONE
+• ft_putstr_fd - DONE
+• ft_putendl_fd - DONE
+• ft_putnbr_fd - DONE
+
+BONUS:
+• ft_lstnew - DONE
+• ft_lstadd_front - DONE
+• ft_lstsize - DONE
+• ft_lstlast - DONE
+• ft_lstadd_back - DONE
+• ft_lstdelone - DONE
+• ft_lstclear - DONE
+• ft_lstiter - DONE
+• ft_lstmap - DONE (Fails on francinette --strict mode);
