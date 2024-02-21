@@ -18,11 +18,13 @@ ${NAME}: ${SRCS}
 all: ${NAME}
 
 clean:
-	echo "rm -f ${OBJECTS} ${NAME}"
+	echo "Cleaning all object files and archives"
+	make -C ./libft fclean
 	rm -f ${OBJECTS} ${NAME}
 
 fclean:	clean
-	echo "rm -f ${PROGRAM}"
+	echo "Cleaning all objects, archives, and program files"
+	make -C ./libft fclean
 	rm -f ${PROGRAM}
 
 re:	fclean all
