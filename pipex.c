@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:40:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/21 17:36:18 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:43:33 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,12 @@ int	pipe_cmd(t_file file)
 		exit_failure(POOPOO_FORK, free_file, file, 1);
 	if (pid == 0)
 		call_child(file, my_pipes);
-	else if (pid > 0 && wait(&status) >= 0)
-	{
-		close(my_pipes[1]);
-		dup2(my_pipes[0], 0);
-	}
+	close(my_pipes[1]);
+	dup2(my_pipes[0], 0);
 	return (pid);
 }
 
-void	call_child(t_file file, int my_pipes[2])
+void	call_child(t_file file, int *my_pipes)
 {
 	close(my_pipes[0]);
 	dup2(my_pipes[1], 1);

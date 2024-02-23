@@ -6,15 +6,18 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:55:49 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/21 17:41:52 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:20:58 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+int	pipe_final_cmd(t_file file);
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_file	file;
+	int		status;
 	int		count;
 
 	if (argc < 5)
@@ -33,8 +36,27 @@ int	main(int argc, char **argv, char **envp)
 	}
 	file = create_file(argv[argc - 1], argv[argc - 2], envp, 1);
 	dup2(file.fd, 1);
-	execute_cmd(file);
-	free_file(file);
+	status = pipe_final_cmd(file);
+	return (free_file(file), status);
+}
+
+int	pipe_final_cmd(t_file file)
+{
+	int		my_pipes[2];
+	int		status;
+	pid_t	pid;
+
+	status = 0;
+	if (pipe(my_pipes) == -1)
+		exit_failure(POOPOO_PIPE, free_file, file, 1);
+	pid = fork();
+	if (pid < 0)
+		exit_failure(POOPOO_FORK, free_file, file, 1);
+	if (pid == 0)
+		execute_cmd(file);
+	else if (waitpid(pid, &status, WNOHANG) > 0)
+		close(my_pipes[1]);
+	return (status);
 }
 
 /*
