@@ -2,7 +2,7 @@ SRCS = main.c\
 		pipex.c\
 		pipex_file_utils.c\
 		ft_strcmp.c
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror
 INCLUDES = ./
 NAME = pipex.a
 PROGRAM = pipex
@@ -19,7 +19,7 @@ all: ${NAME}
 
 clean:
 	echo "Cleaning all object files and archives"
-	make -C ./libft fclean
+	make -C ./libft clean
 	rm -f ${OBJECTS} ${NAME}
 
 fclean:	clean

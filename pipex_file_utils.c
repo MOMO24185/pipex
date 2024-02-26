@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:05:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/21 17:22:06 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:04:11 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_file	create_file(char *name, char *args, char **envp, int mode)
 		else if (mode == 1)
 			file.fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 		if (file.fd == -1)
-			exit_failure(file.name, NULL, file, 1);
+			return (file);
 		file.args = ft_split(args, ' ');
 		if (!ft_strncmp(file.args[0], "./", 2))
 			file.path = get_path(envp, file.args[0], "PWD");
@@ -34,7 +34,6 @@ t_file	create_file(char *name, char *args, char **envp, int mode)
 		if (!ft_strcmp(file.args[0], "./pipex") || !ft_strcmp(file.args[0],
 				"pipex"))
 			exit_failure(POOPOO_USAGE, free_file, file, 0);
-		printf("PATH(%s)\n", file.path);
 		file.envp = envp;
 	}
 	return (file);

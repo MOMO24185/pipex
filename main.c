@@ -6,13 +6,13 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:55:49 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/23 15:20:58 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:25:04 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	pipe_final_cmd(t_file file);
+static int		pipe_final_cmd(t_file file);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -21,10 +21,8 @@ int	main(int argc, char **argv, char **envp)
 	int		count;
 
 	if (argc < 5)
-	{
-		ft_putendl_fd("Usage: file1 cmd1 cmd2... cmdn file2", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
+		return (ft_putendl_fd("Usage: file1 cmd1 cmd2... cmdn file2",
+				STDERR_FILENO), 0);
 	count = 1;
 	while (++count < argc - 2)
 	{
@@ -49,6 +47,8 @@ int	pipe_final_cmd(t_file file)
 	status = 0;
 	if (pipe(my_pipes) == -1)
 		exit_failure(POOPOO_PIPE, free_file, file, 1);
+	if (file.fd == -1)
+		return (-1);
 	pid = fork();
 	if (pid < 0)
 		exit_failure(POOPOO_FORK, free_file, file, 1);
