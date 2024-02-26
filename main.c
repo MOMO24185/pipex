@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:55:49 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/26 15:25:04 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:27:08 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,5 @@ int	pipe_final_cmd(t_file file)
 /*
 POOPOO TO UNPOOP:
 
--	adjust wait process so that all PIDs run at the same
-
-</dev/urandom cat | cat > outej
-./pipex /dev/urandom cat "echo hi" outej
-
--	program stops at error, it should keep going till it creates file2
-
 -	correct err messages to return appropriate message
-
--	check if cmd starts "./" in order to search within current dir
-otherwise use default paths
  */
