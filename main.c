@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:55:49 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/26 15:27:08 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:25:41 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int	pipe_final_cmd(t_file file)
 	if (pipe(my_pipes) == -1)
 		exit_failure(POOPOO_PIPE, free_file, file, 1);
 	if (file.fd == -1)
-		return (-1);
+		return (exit_failure(file.name, NULL, file, -1), -1);
 	pid = fork();
 	if (pid < 0)
 		exit_failure(POOPOO_FORK, free_file, file, 1);
 	if (pid == 0)
 		execute_cmd(file);
-	else if (waitpid(pid, &status, WNOHANG) > 0)
+	else if (waitpid(pid, &status, 0) > 0)
 		close(my_pipes[1]);
 	return (status);
 }
@@ -62,5 +62,8 @@ int	pipe_final_cmd(t_file file)
 /*
 POOPOO TO UNPOOP:
 
--	correct err messages to return appropriate message
+-	correct err messages to return appropriate message on outfile open error
+
+-	output of this command is incorrect
+./pipex file1 poopoostinky wc file2
  */

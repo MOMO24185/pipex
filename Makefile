@@ -1,7 +1,8 @@
 SRCS = main.c\
 		pipex.c\
 		pipex_file_utils.c\
-		ft_strcmp.c
+		ft_strcmp.c\
+		check_pipe.c
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = ./
 NAME = pipex.a

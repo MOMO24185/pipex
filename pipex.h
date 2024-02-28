@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:56:17 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/26 15:24:56 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:56:30 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define POOPOO_OPEN "OPEN Failed"
 # define POOPOO_EXEC "EXECVE Failed"
 # define POOPOO_ACCESS "ACCESS Failed"
-# define POOPOO_CMD "COMMAND Failed"
+# define POOPOO_CMD "PIPEX not allowed in cmds"
 
 typedef struct s_file
 {
@@ -66,6 +66,10 @@ void	free_file(t_file file);
 void	exit_failure(char *str, void (*f)(t_file), t_file file, int exit_option);
 //Free 2d char
 void	free_2dchar(char **str);
+//Checks for pipe content to wait for command execution or not
+void	check_pipe(int *pipe_fd, int pid);
+//Reads using gnl till gnl returns null
+char	*gnl_till_null(int *pipe_fd, char *str);
 
 /***************************/
 /*     Other functions     */
