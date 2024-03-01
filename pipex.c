@@ -6,12 +6,11 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:40:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/28 16:17:52 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:15:07 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include "string.h"
 
 int	pipe_cmd(t_file file)
 {
@@ -37,14 +36,24 @@ void	call_child(t_file file, int *my_pipes)
 {
 	close(my_pipes[0]);
 	dup2(my_pipes[1], 1);
-	execute_cmd(file);
+	execute_cmd(file, my_pipes);
 }
 
-void	execute_cmd(t_file file)
+void	execute_cmd(t_file file, int *my_pipes)
 {
+	char	*str;
+
+	str = NULL;
+	ft_putendl_fd("IN EXECUTE CMD RN", STDERR_FILENO);
 	if (file.path)
 		execve(file.path, file.args, file.envp);
-	exit_failure(file.args[0], free_file, file, -1);
+	exit_failure(POOPOO_EXEC, free_file, file, -1);
+	if (my_pipes != NULL)
+	{
+		ft_putendl_fd("THIS WILL FIX IT", STDERR_FILENO);
+		str = gnl_till_null(my_pipes, str);
+		free(str);
+	}
 }
 
 void	exit_failure(char *str, void (*f)(t_file), t_file file, int exit_option)

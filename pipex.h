@@ -6,14 +6,14 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:56:17 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/28 16:56:30 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:06:55 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 # include "./libft/libft.h"
-# include <stdio.h>
+# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/wait.h>
@@ -24,7 +24,7 @@
 # define POOPOO_PIPE "PIPE Failed"
 # define POOPOO_FORK "FORK Failed"
 # define POOPOO_OPEN "OPEN Failed"
-# define POOPOO_EXEC "EXECVE Failed"
+# define POOPOO_EXEC "Command may not be available"
 # define POOPOO_ACCESS "ACCESS Failed"
 # define POOPOO_CMD "PIPEX not allowed in cmds"
 
@@ -44,7 +44,7 @@ typedef struct s_file
 //for setting up the shell commands, piping and forking.
 int		pipe_cmd(t_file file);
 void	call_child(t_file file, int my_pipes[2]);
-void	execute_cmd(t_file file);
+void	execute_cmd(t_file file, int *my_pipes);
 
 /***************************/
 /*     pipex_file_utils    */

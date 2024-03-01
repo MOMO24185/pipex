@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:21:08 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/28 16:56:41 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:23:54 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	check_pipe(int *pipe_fd, int pid)
 	{
 		str = gnl_till_null(pipe_fd, str);
 		ft_putstr_fd(str, pipe_fd[1]);
+		ft_putendl_fd(str, STDERR_FILENO);
 		free(str);
 		waitpid(pid, NULL, 0);
 	}
