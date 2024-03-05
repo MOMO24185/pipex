@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:40:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/01 11:15:07 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:05:27 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ void	execute_cmd(t_file file, int *my_pipes)
 	char	*str;
 
 	str = NULL;
-	ft_putendl_fd("IN EXECUTE CMD RN", STDERR_FILENO);
 	if (file.path)
 		execve(file.path, file.args, file.envp);
 	exit_failure(POOPOO_EXEC, free_file, file, -1);
 	if (my_pipes != NULL)
 	{
-		ft_putendl_fd("THIS WILL FIX IT", STDERR_FILENO);
 		str = gnl_till_null(my_pipes, str);
 		free(str);
 	}

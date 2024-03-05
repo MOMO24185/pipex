@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:05:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/02/28 16:40:45 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/05 08:12:56 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_file	create_file(char *name, char *args, char **envp, int mode)
 		else
 			file.path = get_path(envp, file.args[0], "PATH");
 		if (!ft_strcmp(file.args[0], "./pipex") || !ft_strcmp(file.args[0],
-				"pipex"))
+				"pipex") || !file.path)
 			exit_failure(POOPOO_CMD, free_file, file, -1);
 		file.envp = envp;
 	}

@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:55:49 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/01 13:46:35 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:24:11 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ int	main(int argc, char **argv, char **envp)
 	int		count;
 
 	if (argc < 5)
-		return (ft_putendl_fd("Usage: file1 cmd1 cmd2... cmdn file2",
-				STDERR_FILENO), 0);
+		return (ft_putendl_fd(POOPOO_USAGE, STDERR_FILENO), 0);
 	count = 1;
 	while (++count < argc - 2)
 	{
 		file = create_file(argv[1], argv[count], envp, 0);
-		if (count == 2)
+		if (count == 2 && file.path)
 			dup2(file.fd, 0);
-		pipe_cmd(file);
-		free_file(file);
+		if (file.path)
+		{
+			pipe_cmd(file);
+			free_file(file);
+		}
 	}
 	file = create_file(argv[argc - 1], argv[argc - 2], envp, 1);
 	if (file.fd >= 0)
@@ -50,7 +52,7 @@ int	pipe_final_cmd(t_file file)
 	pid = fork();
 	if (pid < 0)
 		exit_failure(POOPOO_FORK, free_file, file, 1);
-	if (pid == 0)
+	if (pid == 0 && file.path)
 		execute_cmd(file, NULL);
 	else if (waitpid(pid, &status, 0) > 0)
 		return (status);

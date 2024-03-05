@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:56:17 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/01 11:06:55 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:04:51 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 # include <fcntl.h>
 # include <errno.h>
 
+#include <stdio.h>
+
 # define POOPOO_USAGE "Usage: file1 cmd1 cmd2 ... cmdn file2"
 # define POOPOO_PIPE "PIPE Failed"
 # define POOPOO_FORK "FORK Failed"
 # define POOPOO_OPEN "OPEN Failed"
 # define POOPOO_EXEC "Command may not be available"
 # define POOPOO_ACCESS "ACCESS Failed"
-# define POOPOO_CMD "PIPEX not allowed in cmds"
+# define POOPOO_CMD "Invalid command"
 
 typedef struct s_file
 {
