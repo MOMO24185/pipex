@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:56:17 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/06 11:21:42 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/06 14:09:41 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	free_2dchar(char **str);
 void	check_pipe(int *pipe_fd, int pid, char *cmd);
 //Reads using gnl till gnl returns null
 char	*gnl_till_null(int *pipe_fd, char *str);
+//Reads input and checks for limiter to stop
+void	limiter_check(char *limiter);
 
 /***************************/
 /*     Other functions     */
