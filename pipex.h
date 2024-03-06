@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:56:17 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/05 13:04:51 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:59:09 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	exit_failure(char *str, void (*f)(t_file), t_file file, int exit_option);
 //Free 2d char
 void	free_2dchar(char **str);
 //Checks for pipe content to wait for command execution or not
-void	check_pipe(int *pipe_fd, int pid);
+void	check_pipe(int *pipe_fd, int pid, char *cmd);
 //Reads using gnl till gnl returns null
 char	*gnl_till_null(int *pipe_fd, char *str);
 

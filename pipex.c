@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:40:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/05 13:05:27 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:01:48 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,26 @@ int	pipe_cmd(t_file file)
 {
 	int		my_pipes[2];
 	pid_t	pid;
+	char	*str;
 
+	str = NULL;
 	if (file.fd == -1)
 		return (exit_failure(file.name, NULL, file, 0), -1);
 	if (pipe(my_pipes) == -1)
 		exit_failure(POOPOO_PIPE, free_file, file, 1);
+	if (!file.path)
+	{
+		str = gnl_till_null(my_pipes, str);
+		close(my_pipes[1]);
+		dup2(my_pipes[0], 0);
+		return (free(str), 0);
+	}
 	pid = fork();
 	if (pid < 0)
 		exit_failure(POOPOO_FORK, free_file, file, 1);
 	if (pid == 0)
 		call_child(file, my_pipes);
-	check_pipe((int *)my_pipes, pid);
+	check_pipe((int *)my_pipes, pid, file.path);
 	close(my_pipes[1]);
 	dup2(my_pipes[0], 0);
 	return (pid);
