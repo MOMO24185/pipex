@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:05:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/06 11:28:12 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:23:45 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ t_file	create_file(char *name, char *args, char **envp, int mode)
 	file.fd = -1;
 	if (name)
 	{
-		if (mode == 0)
-			file.fd = open(name, O_RDONLY, 0777);
-		else if (mode == 1)
-			file.fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+		file.fd = open(name, mode, 0777);
 		if (file.fd == -1)
 			return (file);
 		file.args = ft_split(args, ' ');
