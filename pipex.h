@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:56:17 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/06 10:59:09 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:21:42 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define POOPOO_PIPE "PIPE Failed"
 # define POOPOO_FORK "FORK Failed"
 # define POOPOO_OPEN "OPEN Failed"
+# define POOPOO_FILE "Input file is not found"
 # define POOPOO_EXEC "Command may not be available"
 # define POOPOO_ACCESS "ACCESS Failed"
 # define POOPOO_CMD "Invalid command"
@@ -44,8 +45,8 @@ typedef struct s_file
 /***************************/
 //Parses through the arguments and handles function calls
 //for setting up the shell commands, piping and forking.
-int		pipe_cmd(t_file file);
-void	call_child(t_file file, int my_pipes[2]);
+int		pipe_cmd(t_file file, int flags);
+void	call_child(t_file file, int *my_pipes);
 void	execute_cmd(t_file file, int *my_pipes);
 
 /***************************/

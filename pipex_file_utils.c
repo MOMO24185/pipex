@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:05:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/05 08:12:56 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:28:12 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ t_file	create_file(char *name, char *args, char **envp, int mode)
 		if (file.fd == -1)
 			return (file);
 		file.args = ft_split(args, ' ');
-		if (!ft_strncmp(file.args[0], "./", 2))
+		if (!access(file.args[0], F_OK | X_OK))
+			file.path = ft_strdup(file.args[0]);
+		else if (!ft_strncmp(file.args[0], "./", 2))
 			file.path = get_path(envp, file.args[0], "PWD");
 		else
 			file.path = get_path(envp, file.args[0], "PATH");

@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:55:49 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/05 13:46:15 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:20:02 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ int	main(int argc, char **argv, char **envp)
 	{
 		file = create_file(argv[1], argv[count], envp, 0);
 		if (count == 2)
+		{
 			dup2(file.fd, 0);
-		pipe_cmd(file);
+			pipe_cmd(file, 1);
+		}
+		else
+			pipe_cmd(file, 0);
 		free_file(file);
 	}
 	file = create_file(argv[argc - 1], argv[argc - 2], envp, 1);

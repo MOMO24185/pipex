@@ -6,21 +6,21 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:40:50 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/06 11:01:48 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:21:36 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	pipe_cmd(t_file file)
+int	pipe_cmd(t_file file, int flags)
 {
 	int		my_pipes[2];
 	pid_t	pid;
 	char	*str;
 
 	str = NULL;
-	if (file.fd == -1)
-		return (exit_failure(file.name, NULL, file, 0), -1);
+	if (flags == 1 && file.fd == -1)
+		exit_failure(POOPOO_FILE, NULL, file, -1);
 	if (pipe(my_pipes) == -1)
 		exit_failure(POOPOO_PIPE, free_file, file, 1);
 	if (!file.path)

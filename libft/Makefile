@@ -53,25 +53,23 @@ AR = ar
 ARFLAGS = -rcs
 
 ${NAME}: ${SRCS}
-	echo "${CC} ${CFLAGS} ${SRCS} -I ${INCLUDES}"
+	echo "Compiling libft functions into archive"
 	${CC} ${CFLAGS} ${SRCS} -I ${INCLUDES}
-	echo "${AR} ${ARFLAGS} ${NAME} ${OBJECTS}"
 	${AR} ${ARFLAGS} ${NAME} ${OBJECTS}
 
 all: ${NAME}
 
 bonus: ${BONUSES}
-	echo "${CC} ${CFLAGS} ${BONUSES} -I ${INCLUDES}"
+	echo "Compiling libft bonus functions into archive"
 	${CC} ${CFLAGS} ${BONUSES} -I ${INCLUDES}
-	echo "${AR} ${ARFLAGS} ${NAME} ${BONUS_OBJECTS}"
 	${AR} ${ARFLAGS} ${NAME} ${BONUS_OBJECTS}
 
 clean:
-	echo "rm -f ${OBJECTS} ${BONUS_OBJECTS}"
+	echo "Cleaning libft object files"
 	rm -f ${OBJECTS} ${BONUS_OBJECTS}
 
 fclean:	clean
-	echo "rm -f ${NAME}"
+	echo "Cleaning libft object files and archive"
 	rm -f ${NAME}
 
 re:	fclean all
