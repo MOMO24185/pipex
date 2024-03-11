@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:55:49 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/06 12:40:27 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:41:01 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@ int	main(int argc, char **argv, char **envp)
 	count = 1;
 	while (++count < argc - 2)
 	{
-		file = create_file(argv[1], argv[count], envp, O_RDONLY);
-		if (count == 2)
+		if (argv[count])
 		{
-			dup2(file.fd, 0);
-			pipe_cmd(file, 1);
+			file = create_file(argv[1], argv[count], envp, O_RDONLY);
+			if (count == 2)
+			{
+				dup2(file.fd, 0);
+				pipe_cmd(file, 1);
+			}
+			else
+				pipe_cmd(file, 0);
+			free_file(file);
 		}
-		else
-			pipe_cmd(file, 0);
-		free_file(file);
 	}
 	file = create_file(argv[argc - 1], argv[argc - 2], envp, O_CREAT | O_WRONLY
 			| O_TRUNC);
@@ -66,7 +69,6 @@ int	pipe_final_cmd(t_file file)
 /*
 POOPOO TO UNPOOP:
 
--	output of this command is incorrect
-./pipex file1 poopoostinky wc file2
+-close FDs
 
  */

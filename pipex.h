@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:56:17 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/06 14:09:41 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:07:24 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <errno.h>
 
-#include <stdio.h>
+# include <stdio.h>
 
 # define POOPOO_USAGE "Usage: file1 cmd1 cmd2 ... cmdn file2"
 # define POOPOO_PIPE "PIPE Failed"
@@ -66,15 +66,14 @@ char	*join_strs(char *str, char *buffer);
 void	free_file(t_file file);
 //Exits programm with given param string, and prints error message
 //according to the current errno
-void	exit_failure(char *str, void (*f)(t_file), t_file file, int exit_option);
+void	exit_failure(char *str, void (*f)(t_file), t_file file,
+			int exit_option);
 //Free 2d char
 void	free_2dchar(char **str);
 //Checks for pipe content to wait for command execution or not
-void	check_pipe(int *pipe_fd, int pid, char *cmd);
+void	check_pipe(int pid, char *cmd);
 //Reads using gnl till gnl returns null
 char	*gnl_till_null(int *pipe_fd, char *str);
-//Reads input and checks for limiter to stop
-void	limiter_check(char *limiter);
 
 /***************************/
 /*     Other functions     */

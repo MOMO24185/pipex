@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:08:47 by melshafi          #+#    #+#             */
-/*   Updated: 2023/11/08 17:06:54 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:29:08 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	const unsigned char	*ptr1;
 	const unsigned char	*ptr2;
 
+	if (!s1 || !s2)
+		return (-1);
 	ptr1 = (const unsigned char *)s1;
 	ptr2 = (const unsigned char *)s2;
 	count = 0;
