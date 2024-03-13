@@ -16,30 +16,26 @@ static int		pipe_final_cmd(t_file file);
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_file	file;
-	int		count;
+	int		p[2];
+	int		i;
+	t_file file;
 
 	if (argc != 5)
 		return (ft_putendl_fd(POOPOO_USAGE, STDERR_FILENO), 0);
-	count = 1;
-	while (++count < argc - 2)
+	if (pipe(p) == -1)
+		exit_failure(POOPOO_PIPE, free_file, file, 1);
+	i = 1;
+	while (++i < argc - 2)
 	{
-		if (argv[count])
-		{
-			file = create_file(argv[1], argv[count], envp, O_RDONLY);
-			if (count == 2)
-			{
-				dup2(file.fd, 0);
-				pipe_cmd(file, 1);
-			}
-			else
-				pipe_cmd(file, 0);
-			free_file(file);
-		}
+		while (!argv[i])
+			i++;
+		if (i == 2)
+			pipe_cmd(create_file(argv[1], argv[i], envp, O_RDONLY), 1, p);
+		else
+			pipe_cmd(create_file(argv[1], argv[i], envp, O_RDONLY), 0, p);
 	}
-	file = create_file(argv[argc - 1], argv[argc - 2], envp, O_CREAT | O_WRONLY
-			| O_TRUNC);
-	return (pipe_final_cmd(file));
+	return (close(p[0]), pipe_final_cmd(create_file(argv[argc - 1], argv[argc - 2], envp,
+			O_CREAT | O_WRONLY | O_TRUNC)));
 }
 
 int	pipe_final_cmd(t_file file)
@@ -62,13 +58,5 @@ int	pipe_final_cmd(t_file file)
 		free_file(file);
 		return (status);
 	}
-	free_file(file);
-	return (status);
+	return (free_file(file), status);
 }
-
-/*
-POOPOO TO UNPOOP:
-
--close FDs
-
- */

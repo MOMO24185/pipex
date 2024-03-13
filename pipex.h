@@ -45,7 +45,7 @@ typedef struct s_file
 /***************************/
 //Parses through the arguments and handles function calls
 //for setting up the shell commands, piping and forking.
-int		pipe_cmd(t_file file, int flags);
+int		pipe_cmd(t_file file, int flags, int *my_pipes);
 void	call_child(t_file file, int *my_pipes);
 void	execute_cmd(t_file file, int *my_pipes);
 

@@ -18,13 +18,16 @@ t_file	create_file(char *name, char *args, char **envp, int mode)
 
 	file.name = name;
 	file.fd = -1;
+	file.args = NULL;
+	file.envp = envp;
+	file.path = NULL;
 	if (name)
 	{
 		file.fd = open(name, mode, 0777);
 		if (file.fd == -1)
 			return (file);
 		file.args = ft_split(args, ' ');
-		if (!access(file.args[0], F_OK | X_OK))
+		if (file.args[0] && !access(file.args[0], F_OK | X_OK))
 			file.path = ft_strdup(file.args[0]);
 		else if (!ft_strncmp(file.args[0], "./", 2))
 			file.path = get_path(envp, &file.args[0][2], "PWD");
@@ -32,8 +35,7 @@ t_file	create_file(char *name, char *args, char **envp, int mode)
 			file.path = get_path(envp, file.args[0], "PATH");
 		if (!ft_strcmp(file.args[0], "./pipex") || !ft_strcmp(file.args[0],
 				"pipex") || !file.path)
-			exit_failure(POOPOO_CMD, free_file, file, -1);
-		file.envp = envp;
+			exit_failure(POOPOO_CMD, free_file, file, -2);
 	}
 	return (file);
 }
@@ -75,7 +77,7 @@ char	*get_path(char **envp, char *cmd, char *var)
 	while (paths_split[++i])
 	{
 		path = join_strs(ft_strjoin(paths_split[i], "/"), cmd);
-		if (!access(path, F_OK | X_OK))
+		if (path && !access(path, F_OK | X_OK))
 		{
 			free_2dchar(paths_split);
 			return (path);

@@ -12,23 +12,22 @@
 
 #include "pipex.h"
 
-int	pipe_cmd(t_file file, int flags)
+int	pipe_cmd(t_file file, int flags, int *my_pipes)
 {
-	int		my_pipes[2];
 	pid_t	pid;
 	char	*str;
 
 	str = NULL;
 	if (flags == 1 && file.fd == -1)
 		exit_failure(POOPOO_FILE, NULL, file, -1);
-	if (pipe(my_pipes) == -1)
-		exit_failure(POOPOO_PIPE, free_file, file, 1);
+	if (flags == 1)
+		dup2(file.fd, 0);
 	if (!file.path)
 	{
 		str = gnl_till_null(my_pipes, str);
 		close(my_pipes[1]);
 		dup2(my_pipes[0], 0);
-		return (free(str), 0);
+		return (free_file(file), free(str), 0);
 	}
 	pid = fork();
 	if (pid < 0)
@@ -36,9 +35,7 @@ int	pipe_cmd(t_file file, int flags)
 	if (pid == 0)
 		call_child(file, my_pipes);
 	check_pipe(pid, file.path);
-	close(my_pipes[1]);
-	dup2(my_pipes[0], 0);
-	return (pid);
+	return (close(my_pipes[1]), dup2(my_pipes[0], 0), free_file(file), pid);
 }
 
 void	call_child(t_file file, int *my_pipes)
@@ -55,16 +52,18 @@ void	execute_cmd(t_file file, int *my_pipes)
 	str = NULL;
 	if (file.path)
 		execve(file.path, file.args, file.envp);
-	exit_failure(POOPOO_EXEC, free_file, file, 1);
 	if (my_pipes != NULL)
 	{
 		str = gnl_till_null(my_pipes, str);
 		free(str);
 	}
+	exit_failure(POOPOO_EXEC, free_file, file, 1);
 }
 
 void	exit_failure(char *str, void (*f)(t_file), t_file file, int exit_option)
 {
+	if (exit_option == -2)
+		errno = 1;
 	ft_putstr_fd("\x1b[31mpipex: ", STDERR_FILENO);
 	ft_putstr_fd(strerror(errno), STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
