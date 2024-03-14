@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:55:49 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/11 14:41:01 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:01:22 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		p[2];
 	int		i;
-	t_file file;
+	t_file	file;
 
+	file = create_file(NULL, NULL, NULL, 0);
 	if (argc != 5)
 		return (ft_putendl_fd(POOPOO_USAGE, STDERR_FILENO), 0);
 	if (pipe(p) == -1)
@@ -34,8 +35,8 @@ int	main(int argc, char **argv, char **envp)
 		else
 			pipe_cmd(create_file(argv[1], argv[i], envp, O_RDONLY), 0, p);
 	}
-	return (close(p[0]), pipe_final_cmd(create_file(argv[argc - 1], argv[argc - 2], envp,
-			O_CREAT | O_WRONLY | O_TRUNC)));
+	return (close(p[0]), pipe_final_cmd(create_file(argv[argc - 1],
+				argv[argc - 2], envp, O_CREAT | O_WRONLY | O_TRUNC)));
 }
 
 int	pipe_final_cmd(t_file file)

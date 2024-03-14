@@ -14,6 +14,7 @@ NAME = pipex.a
 PROGRAM = pipex
 CC = cc
 OBJECTS = ${SRCS:.c=.o}
+B_OBJECTS = ${BONUS_SRCS:.c=.o}
 
 ${NAME}: ${SRCS}
 	echo "Compiling LIBFT archive"
@@ -32,7 +33,7 @@ bonus:
 clean:
 	echo "Cleaning all object files and archives"
 	make -C ./libft clean
-	rm -f ${OBJECTS} ${NAME}
+	rm -f ${OBJECTS} ${B_OBJECTS} ${NAME}
 
 fclean:	clean
 	echo "Cleaning all objects, archives, and program files"

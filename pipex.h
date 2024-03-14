@@ -6,7 +6,7 @@
 /*   By: melshafi <melshafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:56:17 by melshafi          #+#    #+#             */
-/*   Updated: 2024/03/11 14:07:24 by melshafi         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:10:26 by melshafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
-
-# include <stdio.h>
 
 # define POOPOO_USAGE "Usage: file1 cmd1 cmd2 ... cmdn file2"
 # define POOPOO_PIPE "PIPE Failed"
